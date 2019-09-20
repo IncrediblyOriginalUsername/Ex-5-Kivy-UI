@@ -11,6 +11,7 @@ from pidev.kivy.PauseScreen import PauseScreen
 from pidev.kivy import DPEAButton
 from pidev.kivy import ImageButton
 from kivy.properties import ObjectProperty
+from kivy.uix.slider import Slider
 
 MIXPANEL_TOKEN = "x"
 MIXPANEL = MixPanel("Project Name", MIXPANEL_TOKEN)
@@ -18,6 +19,7 @@ MIXPANEL = MixPanel("Project Name", MIXPANEL_TOKEN)
 SCREEN_MANAGER = ScreenManager()
 MAIN_SCREEN_NAME = 'main'
 ADMIN_SCREEN_NAME = 'admin'
+SIDE_SCREEN_NAME = 'side'
 
 
 class ProjectNameGUI(App):
@@ -35,6 +37,9 @@ class ProjectNameGUI(App):
 
 Window.clearcolor = (1, 1, 1, 1)  # White
 
+class SideScreen(Screen):
+        def ye(self):
+            print("thing")
 
 class MainScreen(Screen):
     """
@@ -43,12 +48,18 @@ class MainScreen(Screen):
     egg = ObjectProperty(None)
     egt = ObjectProperty(None)
     lma = ObjectProperty(None)
+    lmt = ObjectProperty(None)
+    sli = ObjectProperty(None)
     global fy
     global f
     global counter
     counter = 0
     fy = True
     f = True
+    def up(self):
+        self.lmt.text = "%d" % self.sli.value
+
+
     def Motor(self):
         global f
         if(f ==True):
