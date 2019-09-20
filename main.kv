@@ -3,6 +3,8 @@
     egg: egg
     egt: egt
     lma: lma
+    lmt: lmt
+    sli: sli
     FloatLayout:
         size_hint: None, None
 
@@ -25,9 +27,9 @@
 
     DPEAButton:
         id: egg
-        size: 250, 100
-        center_x: root.width * 0.1
-        center_y: root.height * 0.3
+        size: 100, 100
+        x: root.width * 0.1
+        y: root.height * 0.3
 
         color: 0.035, 0.152, 0.725, 1
         text: "On"
@@ -37,9 +39,9 @@
         on_press: root.changeText()
     DPEAButton:
         id: egt
-        size: 250, 100
-        center_x: root.width * 0.1
-        center_y: root.height * 0.5
+        size: 100, 100
+        x: root.width * 0.1
+        y: root.height * 0.5
 
         color: 0.035, 0.152, 0.725, 1
         text: "0"
@@ -62,13 +64,13 @@
         id: lma
         text: "Motor on"
         font_size: 30
-        x: root.width * .2
-        y: root.height * .2
+        x: root.width * -.4
+        y: root.height * -.3
         color: 0, 0, 0, 1
     DPEAButton:
         size: 250, 100
-        x: root.width * 0.2
-        y: root.height * 0.1
+        x: root.width * 0.1
+        y: root.height * .01
 
         color: 0.035, 0.152, 0.725, 1
         text: "Motor Controller"
@@ -76,3 +78,23 @@
 
 
         on_press: root.Motor()
+    Slider:
+        size_hint_y: .7
+        size_hint_x: .2
+        id: sli
+        min: 0
+        max: 100
+        step: 1
+        orientation: "vertical"
+        x: root.width *.3
+        y: root.width * .15
+        on_touch_move: root.up()
+
+
+    Label:
+        id: lmt
+        text: "0"
+        font_size: 30
+        x: root.width * .01
+        y: root.height * .2
+        color: 0, 0, 0, 1
