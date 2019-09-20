@@ -10,6 +10,7 @@ from pidev.kivy.PassCodeScreen import PassCodeScreen
 from pidev.kivy.PauseScreen import PauseScreen
 from pidev.kivy import DPEAButton
 from pidev.kivy import ImageButton
+from kivy.properties import ObjectProperty
 
 MIXPANEL_TOKEN = "x"
 MIXPANEL = MixPanel("Project Name", MIXPANEL_TOKEN)
@@ -39,6 +40,37 @@ class MainScreen(Screen):
     """
     Class to handle the main screen and its associated touch events
     """
+    egg = ObjectProperty(None)
+    egt = ObjectProperty(None)
+    lma = ObjectProperty(None)
+    global fy
+    global f
+    global counter
+    counter = 0
+    fy = True
+    f = True
+    def Motor(self):
+        global f
+        if(f ==True):
+            self.lma.text = " Motor Off"
+            f = False
+        else:
+            self.lma.text = "Motor On"
+            f = True
+    def changeText(self):
+        global fy
+        if( fy == True):
+            self.egg.text = "Off"
+            fy = False
+        else:
+            self.egg.text = "On"
+            fy = True
+    def counterButton(self):
+        global counter
+        counter = counter+1
+        self.egt.text = "%d" % counter
+
+
 
     def pressed(self):
         """
