@@ -74,10 +74,20 @@
 
         color: 0.035, 0.152, 0.725, 1
         text: "Motor Controller"
-
-
-
         on_press: root.Motor()
+    ImageButton:
+        source: "../../Desktop/Reinstalling_system.jpg"
+        size: 250, 100
+        x: root.width * .4
+        y: root.height * .1
+
+        color: 0.035, 0.152, 0.725, 1
+        text: "Moo9"
+        on_press: root.riseup()
+
+
+
+
     Slider:
         size_hint_y: .7
         size_hint_x: .2
@@ -94,7 +104,7 @@
     Label:
         id: lmt
         text: "0"
-        font_size: 30
+        font_size: 1000
         x: root.width * .01
         y: root.height * .2
         color: 0, 0, 0, 1
