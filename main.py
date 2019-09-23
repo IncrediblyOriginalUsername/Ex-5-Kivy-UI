@@ -38,8 +38,13 @@ class ProjectNameGUI(App):
 Window.clearcolor = (1, 1, 1, 1)  # White
 
 class SideScreen(Screen):
+        def __init__(self, **kwargs):
+            Builder.load_file('side.kv')
+            super(SideScreen, self).__init__(**kwargs)
         def ye(self):
             print("thing")
+            SCREEN_MANAGER.current = MAIN_SCREEN_NAME
+
 
 class MainScreen(Screen):
     """
@@ -58,6 +63,9 @@ class MainScreen(Screen):
     f = True
     def up(self):
         self.lmt.text = "%d" % self.sli.value
+    def riseup(self):
+
+        SCREEN_MANAGER.current = SIDE_SCREEN_NAME
 
 
     def Motor(self):
@@ -148,6 +156,7 @@ Builder.load_file('main.kv')
 SCREEN_MANAGER.add_widget(MainScreen(name=MAIN_SCREEN_NAME))
 SCREEN_MANAGER.add_widget(PassCodeScreen(name='passCode'))
 SCREEN_MANAGER.add_widget(PauseScreen(name='pauseScene'))
+SCREEN_MANAGER.add_widget(SideScreen(name=SIDE_SCREEN_NAME))
 SCREEN_MANAGER.add_widget(AdminScreen(name=ADMIN_SCREEN_NAME))
 
 """
