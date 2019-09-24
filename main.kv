@@ -5,6 +5,7 @@
     lma: lma
     lmt: lmt
     sli: sli
+    asd: asd
     FloatLayout:
         size_hint: None, None
 
@@ -84,6 +85,17 @@
         color: 0.035, 0.152, 0.725, 1
         text: "Moo9"
         on_press: root.riseup()
+    ImageButton:
+        id:asd
+        source: "../../Desktop/High_quality_GUI.jpg"
+        size: 250, 100
+        x: root.width * .9
+        y: root.height * .1
+
+        color: 0.035, 0.152, 0.725, 1
+        text: "Moo9"
+        on_press: root.gamers()
+
 
 
 
@@ -104,7 +116,7 @@
     Label:
         id: lmt
         text: "0"
-        font_size: 1000
+        font_size: 30
         x: root.width * .01
         y: root.height * .2
         color: 0, 0, 0, 1

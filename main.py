@@ -12,7 +12,8 @@ from pidev.kivy import DPEAButton
 from pidev.kivy import ImageButton
 from kivy.properties import ObjectProperty
 from kivy.uix.slider import Slider
-
+from kivy.uix.image import Image
+from kivy.animation import Animation
 MIXPANEL_TOKEN = "x"
 MIXPANEL = MixPanel("Project Name", MIXPANEL_TOKEN)
 
@@ -20,6 +21,7 @@ SCREEN_MANAGER = ScreenManager()
 MAIN_SCREEN_NAME = 'main'
 ADMIN_SCREEN_NAME = 'admin'
 SIDE_SCREEN_NAME = 'side'
+ANI_SCREEN_NAME = "anim"
 
 
 class ProjectNameGUI(App):
@@ -45,7 +47,17 @@ class SideScreen(Screen):
             print("thing")
             SCREEN_MANAGER.current = MAIN_SCREEN_NAME
 
-
+class AnimationScreen(Screen):
+        animr = ObjectProperty(None)
+        def __init__(self, **kwargs):
+            Builder.load_file("animation.kv")
+            super(AnimationScreen, self).__init__(**kwargs)
+            anit = Animation(x=0, y=0) + Animation(size=(1, 1)) + Animation(x=500, y=500) + Animation(
+                size=(1000, 1000))
+            anit.repeat = True
+            anit.start(self.animr)
+        def yet(self):
+            SCREEN_MANAGER.current = MAIN_SCREEN_NAME
 class MainScreen(Screen):
     """
     Class to handle the main screen and its associated touch events
@@ -55,14 +67,23 @@ class MainScreen(Screen):
     lma = ObjectProperty(None)
     lmt = ObjectProperty(None)
     sli = ObjectProperty(None)
+    asd = ObjectProperty(None)
     global fy
     global f
     global counter
     counter = 0
     fy = True
     f = True
+
+    def __init__(self, **kwargs):
+        super(MainScreen, self).__init__(**kwargs)
+        ani = Animation(x=100, y=200) + Animation(size=(800,800))+ Animation(x= 500, y = 500) + Animation(size=(100,100))
+        ani.repeat = True
+        ani.start(self.asd)
     def up(self):
         self.lmt.text = "%d" % self.sli.value
+    def gamers(self):
+        SCREEN_MANAGER.current = ANI_SCREEN_NAME
     def riseup(self):
 
         SCREEN_MANAGER.current = SIDE_SCREEN_NAME
@@ -158,6 +179,7 @@ SCREEN_MANAGER.add_widget(PassCodeScreen(name='passCode'))
 SCREEN_MANAGER.add_widget(PauseScreen(name='pauseScene'))
 SCREEN_MANAGER.add_widget(SideScreen(name=SIDE_SCREEN_NAME))
 SCREEN_MANAGER.add_widget(AdminScreen(name=ADMIN_SCREEN_NAME))
+SCREEN_MANAGER.add_widget(AnimationScreen(name=ANI_SCREEN_NAME))
 
 """
 MixPanel
