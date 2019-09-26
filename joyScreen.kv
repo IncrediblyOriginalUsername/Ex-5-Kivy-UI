@@ -1,0 +1,42 @@
+<JoyScreen>:
+    #on_enter: root.startThread() # uncomment this to switch to thread
+    on_enter: root.events() # comment this out to switch the thread
+    name: 'joy'
+    nma: nma
+    aer: aer
+    arm: arm
+    now: now
+    FloatLayout:
+        id: now
+        size_hint: None, None
+
+    DPEAButton:
+        #Go back button
+        size: 175, 100
+        center_x: root.width * 0.35
+        center_y: root.height * 0.5
+        color: 0.035, 0.152, 0.725, 1
+
+        text: "Go back"
+        on_press: root.yes()
+    Label:
+        id: nma
+        text: "Button pressed: False"
+        font_size: 20
+        x: root.width * -.2
+        y: root.height * -.3
+        color: 0, 0, 0, 1
+    Label:
+        id: aer
+        text: "Button combo pressed: False"
+        font_size: 20
+        x: root.width * .3
+        y: root.height * .3
+        color: 0, 0, 0, 1
+    Label:
+        id: arm
+        text: "x: y:"
+        font_size: 10
+        x: root.width * .4
+        y: root.height * .1
+        color: 0, 0, 0, 1
