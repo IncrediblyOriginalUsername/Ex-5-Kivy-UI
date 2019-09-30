@@ -1,5 +1,6 @@
 <SideScreen>:
     name: 'side'
+    yes: yes
     FloatLayout:
         size_hint: None, None
     ImageButton:
@@ -11,3 +12,12 @@
         y: root.height * 0.5
         color: 0, 1, 0, 1
         on_press: root.ye()
+    TextInput:
+        id: yes
+        size_hint: None, None
+        height: 100
+        width: 100
+        x: root.width * 0
+        y: root.height *0
+        text: "Change title"
+        on_text: root.change()

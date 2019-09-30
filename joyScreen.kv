@@ -6,6 +6,8 @@
     aer: aer
     arm: arm
     now: now
+    gamer: gamer
+    gamet: gamet
     FloatLayout:
         id: now
         size_hint: None, None
@@ -19,6 +21,30 @@
 
         text: "Go back"
         on_press: root.yes()
+    DPEAButton:
+        #Arrow Control
+        id: gamer
+        size: 175, 100
+        center_x: root.width * 0.6
+        center_y: root.height * 0.25
+        color: 0.035, 0.152, 0.725, 1
+
+        text: "Arrow controls off"
+        on_press: root.arrowcontrolon()
+    Label:
+        #Arrow Control
+        id: game
+        size: 175, 100
+        x: root.width *.15
+        y: root.width *-.26
+        text: "WASD precise movement, arrow keys faster but less precise"
+    Label:
+        #Arrow Control
+        id: gamet
+        size: 175, 100
+        x: root.width *.3
+        y: root.width *-.3
+        text: "."
     Label:
         id: nma
         text: "Button pressed: False"

@@ -51,20 +51,36 @@ class JoyScreen(Screen):
     aer = ObjectProperty(None)
     arm = ObjectProperty(None)
     now = ObjectProperty(None)
+    gamer = ObjectProperty(None)
+    gamet = ObjectProperty(None)
     global event1
     global event2
     global event3
     global event4
+    global a
+    a = 1
+    global glob
+    glob = 1
+    global x
+    global ad
+    global keyboard
+    x = 1
     global ft
     ft = 2
     def startThread(self):
         print("Thread")
+        self.gamet.text = "Running using threads."
         Thread(target=self.threads).start()
+
+    def _keyboard_closed(self):
+        self._keyboard.unbind(on_key_down=self.arrowcontrol)
+        self._keyboard = None
 
     def threads(self):
         while SCREEN_MANAGER.current == JOY_SCREEN_NAME:
             self.callback(1)
-            self.cords(1)
+            if(x==1):
+                self.cords(1)
             self.combo(1)
             self.backroundc(1)
             sleep(.01)
@@ -86,7 +102,7 @@ class JoyScreen(Screen):
             s = self.aer.text
             self.aer.text = "A"
             self.aer.text = "%s" % s
-            ft = self.joystick.get_both_axes()[0] + self.joystick.get_both_axes()[1]
+            ft = self.arm.x + self.arm.y
 
 
     def combo(self,dt):
@@ -98,6 +114,8 @@ class JoyScreen(Screen):
     def __init__(self, **kwargs):
         Builder.load_file('joyScreen.kv')
         super(JoyScreen, self).__init__(**kwargs)
+        self.arm.y = 0
+        self.arm.x = 0
     def hi(self,df):
         print("hi")
     def canceled(self):
@@ -113,6 +131,9 @@ class JoyScreen(Screen):
 
     def events(self):
         print("Clock")
+        self.gamet.text = "Running using clock scheduling."
+        global a
+        a = 2
         global event1
         global event2
         global event3
@@ -122,13 +143,87 @@ class JoyScreen(Screen):
         event4 = Clock.schedule_interval(self.backroundc, 1 / 100)
         event3 = Clock.schedule_interval(self.cords, 1/100)
     def yes(self):
-        self.canceled() # commit this out to switch to thread instead of clock.
+        if(x == 2):
+            self.arrowcontrolon()
+        if(a == 2):
+            self.canceled() # commit this out to switch to thread instead of clock.
         SCREEN_MANAGER.current = MAIN_SCREEN_NAME
 
+    def arrowcontrolon(self):
+
+        global event3
+        global x
+        global ad
+        global glob
+        if(x == 1):
+            if(a == 2):
+                event3.cancel()
+            self._keyboard = Window.request_keyboard(self._keyboard_closed, self)
+            self._keyboard.bind(on_key_down=self.arrowcontrol)
+            self.gamer.text = "Arrow control on"
+            x = 2
+        else:
+            self._keyboard.release()
+            if(a==2):
+                event3 = Clock.schedule_interval(self.cords, 1/100)
+            self.gamer.text = "Arrow control off"
+            x = 1
+
+    def arrowcontrol(self, keyboard, keycode, text, modifiers):
+        self.arm.text = "x:%f y:%f" % (self.arm.x/400, self.arm.y/300)
+        print("%s"% keycode[1])
+        if(keycode[1]=="w"):
+            if(self.arm.y<300):
+                self.arm.y = self.arm.y + 5
+            else:
+                self.arm.y = 300
+        elif(keycode[1]=="s"):
+            if(self.arm.y>(-300)):
+                self.arm.y = self.arm.y - 5
+            else:
+                self.arm.y = -300
+        elif(keycode[1]=="d"):
+            if(self.arm.x<400):
+                self.arm.x = self.arm.x + 5
+            else:
+                self.arm.x = 400
+        elif (keycode[1]=="a"):
+            if(self.arm.x > (-400)):
+                self.arm.x = self.arm.x - 5
+            else:
+                self.arm.x = -400
+        elif (keycode[1] == "up"):
+            if (self.arm.y < 300):
+                self.arm.y = self.arm.y + 20
+            else:
+                self.arm.y = 300
+        elif (keycode[1] == "down"):
+            if (self.arm.y > (-300)):
+                self.arm.y = self.arm.y - 20
+            else:
+                self.arm.y = -300
+        elif (keycode[1] == "right"):
+            if (self.arm.x < 400):
+                self.arm.x = self.arm.x + 20
+            else:
+                self.arm.x = 400
+        elif (keycode[1] == "left"):
+            if (self.arm.x > (-400)):
+                self.arm.x = self.arm.x - 20
+            else:
+                self.arm.x = -400
+
+
+
+
 class SideScreen(Screen):
+        yes = ObjectProperty(None)
         def __init__(self, **kwargs):
             Builder.load_file('side.kv')
             super(SideScreen, self).__init__(**kwargs)
+        def change(self):
+            input = self.yes.text
+            Window.set_title(input)
         def ye(self):
             SCREEN_MANAGER.current = MAIN_SCREEN_NAME
 
@@ -179,6 +274,7 @@ class MainScreen(Screen):
 
     def Motor(self):
         global f
+        print("a")
         if(f ==True):
             self.lma.text = " Motor Off"
             f = False

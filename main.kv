@@ -6,6 +6,7 @@
     lmt: lmt
     sli: sli
     asd: asd
+    on_enter: root.Motor()
     FloatLayout:
         size_hint: None, None
 
@@ -109,7 +110,7 @@
 
 
     Slider:
-        size_hint_y: .7
+        size_hint_y: .4
         size_hint_x: .2
         id: sli
         min: 0
