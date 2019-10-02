@@ -46,7 +46,7 @@ Window.clearcolor = (1, .3, 1, 1)  # White
 
 
 class JoyScreen(Screen):
-    joystick = Joystick(0, False)
+    joystick = Joystick(0, True)
     nma = ObjectProperty(None)
     aer = ObjectProperty(None)
     arm = ObjectProperty(None)
@@ -71,6 +71,7 @@ class JoyScreen(Screen):
         print("Thread")
         self.gamet.text = "Running using threads."
         Thread(target=self.threads).start()
+        Thread.daemon = True
 
     def _keyboard_closed(self):
         self._keyboard.unbind(on_key_down=self.arrowcontrol)
@@ -86,6 +87,7 @@ class JoyScreen(Screen):
             sleep(.01)
         print("Thread ended")
     def callback(self,dt):
+        #print("afdfs")
         if(self.joystick.get_button_state(1)==1):
             self.nma.text = "Button 1 on"
         else:
