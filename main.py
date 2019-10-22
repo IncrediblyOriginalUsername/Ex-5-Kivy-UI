@@ -87,7 +87,7 @@ class JoyScreen(Screen):
             sleep(.01)
         print("Thread ended")
     def callback(self,dt):
-        #print("afdfs")
+        print("afdfs")
         if(self.joystick.get_button_state(1)==1):
             self.nma.text = "Button 1 on"
         else:
